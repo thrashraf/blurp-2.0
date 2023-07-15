@@ -9,12 +9,14 @@ import Menu from "@/components/menu"
 import GridContainer from "@/components/gridContainer"
 import pb from "@/utils/pocketbase"
 import { useQuery } from "@tanstack/react-query"
-import { useCallback, useMemo } from "react"
 import getImageLink from "@/utils/getImageLink"
+import { BottomDrawer } from "@/components/bottomDrawer"
+import { useState } from "react"
+import useStore from "@/state/store"
 
 const fetchMenus = async () => {
   const data = await pb.collection("Products").getFullList({
-    expand: 'image_url'
+    expand: 'image_url,addons_id'
   })
 
   const sanitizedData = data.map((menu) => ({
@@ -23,14 +25,16 @@ const fetchMenus = async () => {
     product_price: menu.product_price,
     image_url: menu?.expand?.image_url?.map((image: any) => {
       return getImageLink(image)
-    }
-    ) ?? [],
+    }) ?? [],
+    addons: menu?.expand?.addons_id ?? []
   }))
 
   return sanitizedData
 }
 
 export default function IndexPage() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [product, setProduct] = useState({});
 
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-users"],
@@ -53,9 +57,18 @@ export default function IndexPage() {
             imageUrl={menu?.image_url[0]}
             name={menu?.product_name}
             price={menu?.product_price}
+            onClick={() => {
+              setProduct(menu)
+              setOpenDrawer(true)
+            }}
           />
         ))}
       </GridContainer>
+      <BottomDrawer
+        open={openDrawer}
+        onOpenChange={() => setOpenDrawer(false)}
+        product={product}
+      />
     </>
   )
 }

@@ -6,11 +6,12 @@ type Props = {
   imageUrl: string
   price: number
   name: string
+  onClick?: () => void
 }
 
 const Menu = (props: Props) => {
   return (
-    <Card className='mx-auto max-h-[250px] max-w-[150px] rounded-[25px]'>
+    <Card onClick={props.onClick} className='mx-auto max-h-[250px] max-w-[150px] rounded-[25px]'>
       <Image
         src={props.imageUrl}
         alt={props.name}
