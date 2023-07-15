@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,29 +25,35 @@ import {
 
 export default function page() {
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardDescription>Enter your mobile number to proceed</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Please enter your name" />
+    <div>
+      <Button variant="outline" size="icon">
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      <Image src="/picture.svg" alt="SVG Image" width={300} height={200} />
+      <Card className="mt-5 w-[350px]">
+        <CardHeader>
+          <CardDescription>Enter your mobile number to proceed</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" placeholder="Please enter your name" />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="framework">Number Phone</Label>
+                <Input id="name" placeholder="+60" />
+              </div>
             </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Number Phone</Label>
-              <Input id="name" placeholder="+60" />
-            </div>
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline" className="w-full">
-          Continue
-        </Button>
-      </CardFooter>
-    </Card>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline" className="w-full">
+            Continue
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
