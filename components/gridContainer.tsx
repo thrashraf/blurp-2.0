@@ -2,13 +2,11 @@ import React from 'react'
 
 type Props = {
   children: React.ReactNode
-  column: number
-  gap: number
 }
 
-const GridContainer = ({ children, column, gap }: Props) => {
+const GridContainer = ({ children }: Props) => {
   return (
-    <div className={`grid-cols-${column} grid gap-${gap}`}>{children}</div>
+    <div className={`grid grid-cols-2 gap-5 sm:grid-cols-4`}>{children}</div>
   )
 }
 

@@ -10,12 +10,14 @@ type Props = {
 
 const Menu = (props: Props) => {
   return (
-    <Card className='max-w-[300px] rounded-[25px]'>
+    <Card className='mx-auto max-h-[250px] max-w-[150px] rounded-[25px]'>
       <Image
         src={props.imageUrl}
         alt={props.name}
-        width={300}
-        height={300}
+        width={150}
+        height={150}
+        priority={true}
+        className='rounded-[25px] object-cover p-2'
       />
       <CardContent className='p-3'>
         <CardTitle className='text-md mb-2 text-center'>{props.name}</CardTitle>
