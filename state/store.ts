@@ -11,7 +11,9 @@ interface Store {
 
   setCartTotal: () => void
   setCart: (cart: any) => void
-  setCartItemsCount: (cartItemsCount: number) => void
+  removeCart: (cart: any) => void
+  setCartItemsCount: () => void
+  clearCart: () => void
 }
 
 const useStore = create<Store>((set) => ({
@@ -25,7 +27,7 @@ const useStore = create<Store>((set) => ({
 
   setCartTotal: () => {
     const totalPrice = useStore.getState().cart.map((item: any) => {
-      const price = item?.product_price * (item?.quantity ?? 1)
+      const price = item?.product_price * item?.quantity ?? 0
       const addOnsPrice =
         item.selectedAddons?.reduce(
           (acc: number, item: any) => acc + (item.price ?? 0),
@@ -38,12 +40,48 @@ const useStore = create<Store>((set) => ({
       (acc: number, item: any) => acc + parseFloat(item),
       0
     )
-
     set(() => ({ cartTotal: total }))
   },
   setCart(cart) {
-    set((state) => ({ cart: [...state.cart, cart] }))
+    const isCartInCart = useStore.getState().cart.find(
+      (item: any) => item.id === cart.id
+    )
+    if (isCartInCart) {
+      const newCart = useStore.getState().cart.map((item: any) => {
+        if (item.id === cart.id) {
+          return { ...item, quantity: item.quantity + 1 }
+        }
+        return item
+      })
+      set(() => ({ cart: newCart }))
+    } else {
+      set((state) => ({ cart: [...state.cart, {...cart, quantity: 1}] }))
+    }
   },
-  setCartItemsCount: (state) => set(() => ({ cartItemsCount: state })),
+  removeCart(cart) { 
+    if (cart.quantity > 1) {
+      const newCart = useStore.getState().cart.map((item: any) => {
+        if (item.id === cart.id) {
+          return { ...item, quantity: item.quantity - 1 }
+        }
+        return item
+      })
+      set(() => ({ cart: newCart }))
+    }
+    else {
+      const newCart = useStore.getState().cart.filter(
+        (item: any) => item.id !== cart.id
+      )
+      set(() => ({ cart: newCart }))
+    }
+  },
+  setCartItemsCount: () => {
+    const cartItemsCount = useStore.getState().cart.reduce(
+      (acc: number, item: any) => acc + item.quantity,
+      0
+    )
+    set(() => ({ cartItemsCount: cartItemsCount }))
+  },
+  clearCart: () => set(() => ({ cart: [] })),
 }))
 export default useStore

@@ -22,19 +22,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import AppBar from "@/components/appBar"
 
 export default function page() {
   return (
     <div>
-      <Button variant="outline" size="icon">
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
+      <AppBar />
       <Image src="/picture.svg" alt="SVG Image" width={300} height={200} />
-      <Card className="mt-5 w-[350px]">
+      <Card className="mt-5 w-[350px] border-0 shadow-none">
         <CardHeader>
-          <CardDescription>Enter your mobile number to proceed</CardDescription>
+          <CardTitle className="text-sm">Enter your mobile number to proceed</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="border-0">
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
@@ -48,8 +47,8 @@ export default function page() {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" className="w-full">
+        <CardFooter className="flex justify-between border-0">
+          <Button variant="default" className="w-full">
             Continue
           </Button>
         </CardFooter>
