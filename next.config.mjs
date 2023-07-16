@@ -5,7 +5,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['128.199.198.78'],
+    domains: [process?.env.NEXT_PUBLIC_APP_DOMAIN || 'localhost'],
   },
 }
 
