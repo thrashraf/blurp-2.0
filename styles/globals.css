@@ -34,9 +34,11 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    --admin: 252, 8%, 12%, 1;
   }
 
-  .dark {
+  /* .dark {
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
 
@@ -67,7 +69,7 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
-  }
+  } */
 }
 
 @layer base {
@@ -79,3 +81,5 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+

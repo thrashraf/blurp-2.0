@@ -7,6 +7,9 @@ const nextConfig = {
   images: {
     domains: [process?.env.NEXT_PUBLIC_APP_DOMAIN || 'localhost'],
   },
+  experimental: {
+    serverActions: true
+  }
 }
 
 export default nextConfig
