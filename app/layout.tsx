@@ -10,6 +10,7 @@ import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { usePathname } from 'next/navigation'
+import { Toaster } from "@/components/ui/toaster"
 
 import Providers from "@/utils/providers"
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
+              <Toaster />
               <div className={`relative m-auto flex min-h-screen ${!isAdmin && 'max-w-2xl'} flex-col`}>
                 <div className={`flex-1 ${!isAdmin && 'px-5 py-10'}`}>{children}</div>
               </div>

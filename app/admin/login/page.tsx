@@ -10,21 +10,33 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
 
-import { Login } from "./action"
+import { Login } from "@/actions/auth"
+import { useMutation } from "@tanstack/react-query"
+import { Icons } from "@/components/icons"
+import { useToast } from "@/components/ui/use-toast"
 
 const Page = () => {
   const { value: email, onChange: setEmail } = useInput()
   const { value: password, onChange: setPassword } = useInput()
   const router = useRouter();
+  const { toast } = useToast();
+
+  const { mutateAsync: login, isLoading, isError } = useMutation(Login)
 
   const loginAction = async () => {
     try {
-      await Login({ email, password })
+      await login({ email, password })
         .then((res) => {
           console.log(res)
+          localStorage.setItem("vendor", res ?? '')
+          router?.push("/admin/dashboard")
         })
     } catch (error: any) {
-      console.log(error?.message)
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Invalid email or password.",
+      })
     }
   }
 
@@ -53,6 +65,7 @@ const Page = () => {
               id="email"
               value={email}
               onChange={setEmail}
+              className={`${isError ? "border-red-500" : ""}`}
             />
           </div>
           <div className="mb-20 w-[80%]">
@@ -63,6 +76,7 @@ const Page = () => {
               id="password"
               value={password}
               onChange={setPassword}
+              className={`${isError ? "border-red-500" : ""}`}
             />
           </div>
 
@@ -76,8 +90,8 @@ const Page = () => {
             />
           </div>
 
-          <Button type="submit" className="w-[80%] bg-admin">
-            Login
+          <Button type="submit" className="w-[80%] bg-admin" disabled={isLoading}>
+            {isLoading && <Icons.loader className="mr-2 h-3 w-3 animate-spin" />} Login
           </Button>
         </form>
       </div>

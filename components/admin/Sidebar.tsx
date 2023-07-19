@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navlink from './Navlink';
 import { Icons } from '../icons';
+import { Logout } from '@/actions/auth';
+import { useRouter } from 'next/navigation';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -55,10 +57,11 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+  const router = useRouter();
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
 
-  const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
+  const storedSidebarExpanded = localStorage?.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
@@ -97,6 +100,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, [sidebarExpanded]);
 
+  const logout = async () => {
+    await Logout();
+    localStorage.removeItem('vendor');
+    router.push('/admin/login');
+  }
+
   return (
     <aside
       ref={sidebar}
@@ -105,7 +114,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     >
       <div className="py-5.5 lg:py-6.5 flex items-center justify-between gap-2 px-6">
         <Link href="/admin/dashboard">
-          <Image src={'/logo.png'} alt="Logo" width={300} height={300} />
+          <Image src={'/logo.png'} alt="Logo" width={300} height={300} priority={true} />
         </Link>
 
         <button
@@ -139,6 +148,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <div className='my-6 pl-3'>
                 {item.items.map((item, index) => (
                   <Navlink
+                    onClick={item.name === 'Logout' ? logout : () => { }}
                     key={index}
                     href={item.href}
                     label={item.name}
