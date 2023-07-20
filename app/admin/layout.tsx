@@ -17,8 +17,10 @@ const Layout = (props: Props) => {
   }
   return (
     <div className="flex h-full w-full">
-      <Sidebar setSidebarOpen={() => { }} sidebarOpen={true} />
-      <main className="w-full p-5">{props.children}</main>
+      <Sidebar setSidebarOpen={() => { }} sidebarOpen={true}>
+        {props.children}
+      </Sidebar>
+      {/* <main className="w-full p-5">{props.children}</main> */}
     </div>
   )
 }

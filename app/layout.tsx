@@ -45,14 +45,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "h-full bg-background font-sans antialiased",
             fontSans.variable
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
               <Toaster />
-              <div className={`relative m-auto flex min-h-screen ${!isAdmin && 'max-w-2xl'} flex-col`}>
+              <div className={` ${!isAdmin && 'max-w-2xl'} flex-col`}>
                 <div className={`flex-1 ${!isAdmin && 'px-5 py-10'}`}>{children}</div>
               </div>
               <TailwindIndicator />

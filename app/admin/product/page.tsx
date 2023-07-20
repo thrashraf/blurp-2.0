@@ -5,6 +5,7 @@ import Menu from '@/components/menu'
 import { Button } from '@/components/ui/button'
 import getImageLink from '@/utils/getImageLink'
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import React, { useCallback, useMemo } from 'react'
 
 type Props = {}
@@ -37,7 +38,9 @@ const Page = (props: Props) => {
     <div className='h-full w-full'>
       <div className='flex justify-end'>
         <Button variant={'admin'}>
-          Create Product
+          <Link href={'/admin/product/create'}>
+            Create Product
+          </Link>
         </Button>
       </div>
 
