@@ -35,7 +35,7 @@ const Page = (props: Props) => {
   const productsData = useMemo(() => sanitizedData(), [sanitizedData])
 
   return (
-    <div className='h-full w-full'>
+    <div className='w-full'>
       <div className='flex justify-end'>
         <Button variant={'admin'}>
           <Link href={'/admin/product/create'}>

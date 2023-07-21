@@ -18,8 +18,8 @@ const Page = (props: Props) => {
   })
 
   return (
-    <div className="mt-10 h-full">
-      <form action={() => console.log(product)} className="m-auto flex h-full max-w-[60%] flex-col items-center">
+    <div className="rounded-xl bg-white py-10">
+      <form action={() => console.log(product)} className="m-auto flex flex-col items-center">
         <UploadImage
           setFiles={(file: string) => {
             setProduct({
@@ -29,39 +29,45 @@ const Page = (props: Props) => {
           }}
         />
 
-        <div className="my-10 w-full px-8">
-          <Label htmlFor="name">Product Name</Label>
-          <Input
-            required={true}
-            id="name"
-            value={product.product_name}
-            onChange={(e) => {
-              setProduct({
-                ...product,
-                product_name: e.target.value,
-              })
-            }}
-          />
-        </div>
-        <div className="mb-10 w-full px-8">
-          <Label htmlFor="price">Product Price</Label>
-          <Input
-            required={true}
-            id="price"
-            type="number"
-            value={product.product_price}
-            onChange={(e) => {
-              setProduct({
-                ...product,
-                product_price: +e?.target.value,
-              })
-            }}
-          />
+        <div className="my-10 flex w-full items-center justify-between">
+          <div className="w-full px-8">
+            <Label htmlFor="name">Product Name</Label>
+            <Input
+              required={true}
+              id="name"
+              value={product.product_name}
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  product_name: e.target.value,
+                })
+              }}
+              className="w-full"
+            />
+          </div>
+          <div className="w-full px-8">
+            <Label htmlFor="price">Product Price</Label>
+            <Input
+              required={true}
+              id="price"
+              type="number"
+              value={product.product_price}
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  product_price: +e?.target.value,
+                })
+              }}
+              className="w-full"
+            />
+          </div>
         </div>
 
-        <Button type="submit" className="my-20 w-[90%] bg-admin px-8">
-          Create
-        </Button>
+        <div className="w-full px-8">
+          <Button type="submit" className=" mt-20 w-full bg-admin">
+            Create
+          </Button>
+        </div>
       </form>
     </div>
   )

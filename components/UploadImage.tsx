@@ -20,6 +20,8 @@ const Upload = (props: Props) => {
       <FilePond
         allowMultiple={false}
         maxFiles={1}
+        acceptedFileTypes={['image/*']}
+        labelIdle='<span class="filepond--label-action">Click here to upload</span> or drag and drop image'
         allowReorder={true}
         maxParallelUploads={1}
         server={{

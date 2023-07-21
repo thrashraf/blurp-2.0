@@ -52,8 +52,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Providers>
               <Toaster />
-              <div className={`${!isAdmin && 'max-w-2xl m-auto'} flex-col`}>
-                <div className={`flex-1 ${!isAdmin && 'px-5 py-10'}`}>{children}</div>
+              <div className={`${!isAdmin && 'm-auto max-w-2xl'} h-full`}>
+                <div className={`h-full ${!isAdmin && 'px-5 py-10'}`}>{children}</div>
               </div>
               <TailwindIndicator />
             </Providers>

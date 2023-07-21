@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
 
-import { Login } from "@/actions/auth/auth"
+import { Login } from "@/actions/auth"
 import { useMutation } from "@tanstack/react-query"
 import { Icons } from "@/components/icons"
 import { useToast } from "@/components/ui/use-toast"

@@ -61,6 +61,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, children }: SidebarProps) => {
   const router = useRouter();
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
+  const pathname = usePathname();
 
   // const storedSidebarExpanded = localStorage?.getItem('sidebar-expanded');
   // const [sidebarExpanded, setSidebarExpanded] = useState(
@@ -107,8 +108,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, children }: SidebarProps) => {
     router.push('/admin/login');
   }
 
+  const getModuleName = (pathname: string) => {
+    // get the module name from the pathname and capitalize the first letter
+    const moduleName = pathname.split('/')[2];
+    return moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
+  }
+
   return (
-    <div className='flex h-full w-full relative'>
+    <div className='relative flex w-full'>
       <aside
         ref={sidebar}
         className={`z-9999 fixed inset-y-0 left-0 flex h-screen w-[300px] flex-col overflow-y-hidden bg-admin duration-300 ease-linear lg:translate-x-0${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -164,7 +171,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, children }: SidebarProps) => {
         </div>
       </aside>
 
-      <main className='ml-[300px] h-full w-full'>
+      <main className='ml-[300px] w-full bg-[#F6F7FB] p-10'>
+        <div className='mb-10 flex items-center justify-between'>
+          <h1 className='text-4xl font-bold'>{getModuleName(pathname)}</h1>
+          <Icons.bell className='h-10 w-10 rounded-full bg-white p-2' />
+        </div>
         {children}
       </main>
     </div>
