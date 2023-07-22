@@ -27,11 +27,11 @@ const HorizontalMenu = (props: Props) => {
       </div>
       <div className='flex w-[20%] justify-between'>
         <Button className='h-6 w-6 rounded-full bg-gray-200 p-2' onClick={props.addToCart}>
-          <Icons.plus className='h-2 w-2' />
+          <Icons.plus className='h-2 w-2 text-black' />
         </Button>
         <span>{props?.quantity}</span>
         <Button className='h-6 w-6 rounded-full bg-gray-200 p-2' onClick={props.removeFromCart}>
-          <Icons.minus className='h-2 w-2' />
+          <Icons.minus className='h-2 w-2 text-black' />
         </Button>
       </div>
     </div>

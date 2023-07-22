@@ -67,7 +67,7 @@ export default function Page() {
         {cart?.map((item: any) => (
           <HorizontalMenu
             key={item?.id}
-            imageUrl={item?.image_url?.[0] ?? ""}
+            imageUrl={item?.image_url}
             name={item?.product_name}
             price={item?.product_price}
             quantity={item?.quantity}

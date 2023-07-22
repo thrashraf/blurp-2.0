@@ -34,6 +34,7 @@ export const Icons = {
   ),
   cart: (props: LucideProps) => (
     <svg
+      {...props}
       width="22"
       height="20"
       viewBox="0 0 22 20"

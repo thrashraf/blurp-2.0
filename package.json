@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "types": "npx pocketbase-typegen --db ../pocketbase/pb_data/data.db --out pocketbase-types.ts"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -35,6 +36,7 @@
     "next": "^13.4.8",
     "next-themes": "^0.2.1",
     "pocketbase": "^0.15.3",
+    "pocketbase-typegen": "^1.1.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-filepond": "^7.1.2",

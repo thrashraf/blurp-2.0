@@ -25,7 +25,7 @@ const Navbar = (props: Props) => {
 
       <div className='relative flex h-[50px] w-[50px] items-center justify-center rounded-full bg-white'>
         <span className='absolute -right-2 -top-2 m-auto rounded-full bg-red-500 px-2 py-1 text-xs font-bold'>{cartItemsCount}</span>
-        <Icons.cart />
+        <Icons.cart className='text-black' />
       </div>
     </nav>
   )
