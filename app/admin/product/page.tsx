@@ -17,7 +17,11 @@ const Page = (props: Props) => {
 
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-users"],
-    queryFn: () => GetProducts(vendorId ?? ''),
+    queryFn: () => pb.collection("Products").getFullList({
+      $autoCancel: false,
+      expand: "image_url,addons_id",
+      filter: `(vendor_id="${vendorId}")`,
+    }),
     enabled: !!vendorId
   });
 
@@ -45,7 +49,7 @@ const Page = (props: Props) => {
         </Button>
       </div>
 
-      <div className='my-14 grid grid-cols-5'>
+      <div className='my-14 grid grid-cols-5 gap-5'>
         {productsData?.map((menu) => (
           <Menu
             key={menu?.id}
