@@ -52,7 +52,6 @@ export async function Logout() {
       name: "token",
       value: "",
       httpOnly: true,
-      path: "/admin",
       secure: true,
       maxAge: 0,
     })
