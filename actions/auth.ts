@@ -21,7 +21,7 @@ export async function Login(props: LoginProps) {
             name: "token",
             value: res.token,
             httpOnly: true,
-            path: "/admin",
+            path: "/admin/*",
             secure: true,
             maxAge: 60 * 60 * 24 * 14,
           })
@@ -33,6 +33,16 @@ export async function Login(props: LoginProps) {
   } catch (error: any) {
     throw new Error(error.message)
   }
+}
+
+export async function setCookies(token: string) { 
+  return cookies().set({
+    name: "token",
+    value: token,
+    httpOnly: true,
+    secure: true,
+    maxAge: 60 * 60 * 24 * 14,
+  })
 }
 
 export async function Logout() { 

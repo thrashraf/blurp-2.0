@@ -13,7 +13,7 @@ type Props = {
 
 const Navlink = (props: Props) => {
   const pathname = usePathname()
-  const isActive = pathname === props.href
+  const isActive = pathname.includes(props.href)
 
   return (
     <Link onClick={props.onClick} href={props.href} className={`my-2 flex items-center rounded-lg p-3 hover:bg-secondary hover:text-black ${isActive ? 'bg-white text-black' : 'bg-transparent text-white'}`}>

@@ -4,17 +4,21 @@ import { GetProducts } from '@/actions/products'
 import Menu from '@/components/menu'
 import { Button } from '@/components/ui/button'
 import getImageLink from '@/utils/getImageLink'
+import pb from '@/utils/pocketbase'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 type Props = {}
 
 const Page = (props: Props) => {
 
+  const [vendorId, setVendorId] = useState<string | null>(localStorage?.getItem("vendor"))
+
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-users"],
-    queryFn: () => GetProducts(),
+    queryFn: () => GetProducts(vendorId ?? ''),
+    enabled: !!vendorId
   });
 
   const sanitizedData = useCallback(() => {
@@ -24,10 +28,7 @@ const Page = (props: Props) => {
       id: menu.id,
       product_name: menu.product_name,
       product_price: menu.product_price,
-      image_url: menu?.expand?.image_url?.map((image: any) => {
-        return getImageLink(image)
-      }
-      ) ?? [],
+      image_url: getImageLink(menu?.expand?.image_url as any),
       addons: menu?.expand?.addons_id ?? []
     }))
   }, [data])
@@ -44,11 +45,11 @@ const Page = (props: Props) => {
         </Button>
       </div>
 
-      <div className='grid grid-cols-5'>
+      <div className='my-14 grid grid-cols-5'>
         {productsData?.map((menu) => (
           <Menu
             key={menu?.id}
-            imageUrl={menu?.image_url[0]}
+            imageUrl={menu?.image_url}
             name={menu?.product_name}
             price={menu?.product_price}
           />
