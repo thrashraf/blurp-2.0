@@ -3,6 +3,7 @@
 import * as React from "react"
 import { useState } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { placeOrder } from "@/actions/orders"
 import { OrdersOrderStatusOptions } from "@/pocketbase-types"
 import useStore from "@/state/store"
@@ -20,7 +21,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import AppBar from "@/components/appBar"
-import { useRouter } from "next/navigation"
 
 export default function Page() {
   const router = useRouter()
@@ -34,17 +34,21 @@ export default function Page() {
   const cart = useStore((state) => state.cart)
   const cartTotal = useStore((state) => state.cartTotal)
   const cartItemsCount = useStore((state) => state.cartItemsCount)
-  const { mutateAsync: order, isLoading, isError } = useMutation(placeOrder, {
+  const {
+    mutateAsync: order,
+    isLoading,
+    isError,
+  } = useMutation(placeOrder, {
     onSuccess: () => {
-      router.replace('/form/success-order')
+      router.replace("/form/success-order")
     },
     onError: () => {
       console.log("error")
-    }
+    },
   })
 
   const createOrder = async () => {
-    if (vendor === null) return;
+    if (vendor === null) return
 
     try {
       await order({
@@ -64,8 +68,8 @@ export default function Page() {
   return (
     <form action={createOrder}>
       <AppBar />
-      <Image src="/picture.svg" alt="SVG Image" width={300} height={200} />
-      <Card className="mt-5 w-[350px] border-0 shadow-none">
+      <Image src="/picture.svg" alt="SVG Image" width={300} height={200} flex />
+      <Card className=" mt-5 w-[350px] border-0 shadow-none ">
         <CardHeader>
           <CardTitle className="text-sm">
             Enter your mobile number to proceed
