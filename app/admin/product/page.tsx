@@ -7,7 +7,7 @@ import getImageLink from '@/utils/getImageLink'
 import pb from '@/utils/pocketbase'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 type Props = {}
 

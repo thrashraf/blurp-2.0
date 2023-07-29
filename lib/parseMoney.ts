@@ -1,7 +1,4 @@
 export function parseMoney(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'MYR',
-    maximumFractionDigits: 5,
-  }).format(value);
+  const formatter = (value / 100).toFixed(2);
+  return `RM ${formatter}`;
 }
