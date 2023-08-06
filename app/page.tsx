@@ -1,23 +1,21 @@
 'use client'
 
-import Link from "next/link"
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
 import Navbar from "@/components/navbar"
 import SearchBar from "@/components/searchBar"
 import Menu from "@/components/menu"
 import GridContainer from "@/components/gridContainer"
-import pb from "@/utils/pocketbase"
 import { useQuery } from "@tanstack/react-query"
 import getImageLink from "@/utils/getImageLink"
 import { BottomDrawer } from "@/components/bottomDrawer"
 import { useState } from "react"
 import { GetProducts } from "@/actions/products"
+import useInput from "@/hooks/useInput"
 
 export default function IndexPage() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [product, setProduct] = useState({});
   const [vendorId, setVendorId] = useState<string | null>(localStorage?.getItem("vendor") ?? null)
+  const { value: search, onChange: setSearch } = useInput();
 
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-users"],
@@ -41,6 +39,8 @@ export default function IndexPage() {
         containerStyle="my-5"
         inputStyle="px-2 py-5 my-2 rounded-lg bg-gray-100"
         placeholder="Search"
+        value={search}
+        onChange={setSearch}
       />
       <GridContainer>
         {sanitizedData?.map((menu: any) => (

@@ -46,6 +46,12 @@ export default function Page() {
   const createOrder = async () => {
     if (vendor === null) return;
 
+    const ordersDetail = cart?.map((item: any) => ({
+      quantity: item?.quantity,
+      product_id: item?.id
+    })
+    )
+
     try {
       await order({
         name,
@@ -55,6 +61,7 @@ export default function Page() {
         product_id: cart?.map((item: any) => item?.id),
         vendor_id: vendor ?? "",
         addons_id: cart?.map((item: any) => item?.addons_id),
+        orders_detail: ordersDetail
       })
     } catch (error: any) {
       console.log(error)

@@ -96,16 +96,17 @@ export enum OrdersOrderStatusOptions {
 	"completed" = "completed",
 	"paid" = "paid",
 }
-export type OrdersRecord = {
+export type OrdersRecord<Torders_detail = unknown> = {
 	payment_id?: RecordIdString
 	table_id?: RecordIdString
-	total_price: number
 	product_id: RecordIdString[]
 	order_status: OrdersOrderStatusOptions
 	vendor_id: RecordIdString
 	addons_id?: RecordIdString[]
 	name: string
 	phone_number: string
+	total_price: number
+	orders_detail?: null | Torders_detail
 }
 
 export type PaddocksRecord = {
@@ -186,7 +187,7 @@ export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> &
 export type CustomersResponse<Texpand = unknown> = Required<CustomersRecord> & BaseSystemFields<Texpand>
 export type ImagesResponse<Texpand = unknown> = Required<ImagesRecord> & BaseSystemFields<Texpand>
 export type NotificationsResponse<Texpand = unknown> = Required<NotificationsRecord> & BaseSystemFields<Texpand>
-export type OrdersResponse<Texpand = unknown> = Required<OrdersRecord> & BaseSystemFields<Texpand>
+export type OrdersResponse<Torders_detail = unknown, Texpand = unknown> = Required<OrdersRecord<Torders_detail>> & BaseSystemFields<Texpand>
 export type PaddocksResponse<Texpand = unknown> = Required<PaddocksRecord> & BaseSystemFields<Texpand>
 export type PaymentsResponse<Texpand = unknown> = Required<PaymentsRecord> & BaseSystemFields<Texpand>
 export type ProductsResponse<Texpand = unknown> = Required<ProductsRecord> & BaseSystemFields<Texpand>

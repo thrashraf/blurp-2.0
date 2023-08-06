@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardContent, CardDescription, CardTitle } from './ui/card'
 import Image from 'next/image'
+import { parseMoney } from '@/lib/parseMoney'
 
 type Props = {
   imageUrl: string
@@ -18,11 +19,11 @@ const Menu = (props: Props) => {
         width={150}
         height={150}
         priority={true}
-        className='rounded-[25px] object-cover p-2'
+        className='rounded-[25px] object-cover p-2 max-h-[150px]'
       />
       <CardContent className='p-3'>
-        <CardTitle className='text-md mb-2 text-center'>{props.name}</CardTitle>
-        <CardDescription className='rounded-[25px] bg-gray-300 py-2 text-center text-sm text-black'>RM {props.price}</CardDescription>
+        <CardTitle className='text-md mb-2 max-w-[250px] truncate text-center' >{props.name}</CardTitle>
+        <CardDescription className='rounded-[25px] bg-gray-300 py-2 text-center text-sm text-black'>{parseMoney(props.price)}</CardDescription>
       </CardContent>
     </Card>
   )
