@@ -13,7 +13,7 @@ type Props = {}
 
 const Page = (props: Props) => {
 
-  const [vendorId, setVendorId] = useState<string | null>(localStorage?.getItem("vendor"))
+  const [vendorId, setVendorId] = useState<string | null>(null)
 
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-dashboard"],
@@ -27,6 +27,10 @@ const Page = (props: Props) => {
       unSubscribeOrdersSocket()
     }
   }, [data])
+
+  useEffect(() => {
+    setVendorId(localStorage?.getItem("vendor"))
+  }, [])
 
   return (
     <div className='flex flex-col gap-5'>

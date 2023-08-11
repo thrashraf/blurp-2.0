@@ -13,7 +13,7 @@ type Props = {}
 
 const Page = (props: Props) => {
 
-  const [vendorId, setVendorId] = useState<string | null>(localStorage?.getItem("vendor"))
+  const [vendorId, setVendorId] = useState<string | null>(null)
 
   const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ["hydrate-users"],
@@ -38,6 +38,10 @@ const Page = (props: Props) => {
   }, [data])
 
   const productsData = useMemo(() => sanitizedData(), [sanitizedData])
+
+  useEffect(() => {
+    setVendorId(localStorage?.getItem("vendor"))
+  }, [])
 
   return (
     <div className='w-full'>

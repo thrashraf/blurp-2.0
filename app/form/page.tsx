@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { placeOrder } from "@/actions/orders"
 import { OrdersOrderStatusOptions } from "@/pocketbase-types"
@@ -28,7 +28,7 @@ export default function Page() {
   const { value: name, onChange: setName } = useInput()
   const { value: number, onChange: setNumber } = useInput()
   const [vendor, setVendor] = useState<string | null>(
-    localStorage?.getItem("vendor") ?? null
+    null
   )
 
   const cart = useStore((state) => state.cart)
@@ -67,6 +67,10 @@ export default function Page() {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    setVendor(localStorage?.getItem("vendor"))
+  }, [])
 
   return (
     <form action={createOrder}>

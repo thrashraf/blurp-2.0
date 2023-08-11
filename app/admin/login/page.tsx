@@ -32,7 +32,7 @@ const Page = () => {
         .then((res: any) => {
           if (res?.token) {
             setCookies(res?.token);
-            localStorage.setItem("vendor", res?.record?.vendor)
+            localStorage?.setItem("vendor", res?.record?.vendor)
             router?.push("/admin/dashboard")
           }
         })

@@ -19,7 +19,7 @@ const Menu = (props: Props) => {
         width={150}
         height={150}
         priority={true}
-        className='rounded-[25px] object-cover p-2 max-h-[150px]'
+        className='max-h-[150px] rounded-[25px] object-cover p-2'
       />
       <CardContent className='p-3'>
         <CardTitle className='text-md mb-2 max-w-[250px] truncate text-center' >{props.name}</CardTitle>
