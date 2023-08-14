@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Icons } from './icons'
 import { Button } from './ui/button'
+import { parseMoney } from '@/lib/parseMoney'
 
 type Props = {
   imageUrl: string
@@ -23,7 +24,7 @@ const HorizontalMenu = (props: Props) => {
       />
       <div className='flex w-[40%] flex-col justify-between'>
         <span className='text-sm'>{props.name}</span>
-        <span className='text-sm'>RM {props.price}</span>
+        <span className='text-sm'>{parseMoney(props.price)}</span>
       </div>
       <div className='flex w-[20%] justify-between'>
         <Button className='h-6 w-6 rounded-full bg-gray-200 p-2' onClick={props.addToCart}>

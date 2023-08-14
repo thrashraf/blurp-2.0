@@ -10,6 +10,7 @@ import {
 import { Checkbox } from "./ui/checkbox"
 import useStore from "@/state/store"
 import { use, useState } from "react"
+import { parseMoney } from "@/lib/parseMoney"
 
 type Props = {
   open: boolean
@@ -44,8 +45,8 @@ export function BottomDrawer(props: Props) {
     <Sheet open={props.open} onOpenChange={props.onOpenChange} >
       <SheetContent side={'bottom'} className="rounded-t-[25px]">
         <SheetHeader className="flex-row items-center justify-between">
-          <SheetTitle>{product?.product_name}</SheetTitle>
-          <SheetTitle>RM {product?.product_price}</SheetTitle>
+          <SheetTitle className="max-w-[50%] break-all text-start">{product?.product_name}</SheetTitle>
+          <SheetTitle>{parseMoney(product.product_price)}</SheetTitle>
         </SheetHeader>
         <div className="mt-3">
           {product?.addons?.length > 0 && (

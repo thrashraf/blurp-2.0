@@ -7,6 +7,7 @@ import useStore from "@/state/store"
 import { Button } from "@/components/ui/button"
 import AppBar from "@/components/appBar"
 import HorizontalMenu from "@/components/horizontalMenu"
+import { parseMoney } from "@/lib/parseMoney"
 
 export default function Page() {
   const router = useRouter()
@@ -56,7 +57,7 @@ export default function Page() {
         <h1 className="text-2xl font-semibold">
           {cartItemsCount ?? 0} Items in the cart for
         </h1>
-        <h1 className="text-2xl font-semibold">RM {cartTotal.toFixed(2)}</h1>
+        <h1 className="text-2xl font-semibold">{parseMoney(cartTotal)}</h1>
       </div>
 
       <div className="mt-10 w-full border-b-[1px] border-b-gray-300 pb-2 text-gray-400">
