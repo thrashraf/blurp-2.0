@@ -1,21 +1,25 @@
 "use client"
 
 import React, { useState } from "react"
+import { useRouter } from "next/navigation"
+import { CreateProduct } from "@/actions/products"
+import { useMutation } from "@tanstack/react-query"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import UploadImage from "@/components/UploadImage"
-import { useMutation } from "@tanstack/react-query"
-import { CreateProduct } from "@/actions/products"
-import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
+import UploadImage from "@/components/UploadImage"
 
 type Props = {}
 
 const Page = (props: Props) => {
   const router = useRouter()
-  const { mutateAsync: createProduct, isLoading, isError } = useMutation(CreateProduct)
+  const {
+    mutateAsync: createProduct,
+    isLoading,
+    isError,
+  } = useMutation(CreateProduct)
 
   const [product, setProduct] = useState({
     product_name: "",
@@ -26,10 +30,14 @@ const Page = (props: Props) => {
 
   const createProductAction = async () => {
     try {
-      await createProduct({ product_name: product.product_name, product_price: product.product_price, image_url: product.image_url, vendor_id: product.vendor_id ?? '' })
-        .then((res) => {
-          router?.push("/admin/product")
-        })
+      await createProduct({
+        product_name: product.product_name,
+        product_price: product.product_price,
+        image_url: product.image_url,
+        vendor_id: product.vendor_id ?? "",
+      }).then((res) => {
+        router?.push("/admin/product")
+      })
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -41,7 +49,10 @@ const Page = (props: Props) => {
 
   return (
     <div className="rounded-xl bg-white py-10">
-      <form action={createProductAction} className="m-auto flex flex-col items-center">
+      <form
+        action={createProductAction}
+        className="m-auto flex flex-col items-center"
+      >
         <UploadImage
           setFiles={(file: string) => {
             setProduct({
@@ -86,7 +97,11 @@ const Page = (props: Props) => {
         </div>
 
         <div className="w-full px-8">
-          <Button disabled={isLoading} type="submit" className=" mt-20 w-full bg-admin">
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className=" mt-20 w-full bg-admin"
+          >
             Create
           </Button>
         </div>
